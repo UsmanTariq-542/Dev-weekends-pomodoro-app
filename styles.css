@@ -283,3 +283,99 @@ button:focus-visible {
 		flex: 1 1 0;
 	}
 }
+
+@media (max-width: 360px) {
+	body {
+		padding: 8px;
+	}
+
+	.timer-card {
+		padding: 14px;
+		border-radius: 22px;
+		gap: 16px;
+	}
+
+	.timer-card__header h1 {
+		font-size: 0.9rem;
+	}
+
+	.timer-card__header p {
+		font-size: 0.85rem;
+	}
+
+	.timer-circle {
+		width: min(100%, 240px);
+	}
+
+	.timer-circle::after {
+		inset: 12px;
+	}
+
+	.timer-mode {
+		font-size: 0.68rem;
+		letter-spacing: 0.18em;
+	}
+
+	.timer-display {
+		font-size: clamp(2.7rem, 16vw, 4rem);
+	}
+
+	.timer-controls {
+		gap: 10px;
+	}
+
+	button {
+		width: 100%;
+		min-width: 0;
+		padding: 11px 14px;
+	}
+
+	.settings-panel,
+	.history-panel {
+		padding-top: 8px;
+	}
+
+	.settings-form {
+		gap: 10px;
+	}
+
+	input {
+		padding: 10px 12px;
+	}
+
+	.history-list li {
+		padding: 12px 14px;
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 200px) {
+	body {
+		padding: 4px;
+	}
+
+	.timer-card {
+		padding: 10px;
+		border-radius: 18px;
+	}
+
+	.timer-circle {
+		width: 100%;
+		max-width: 170px;
+	}
+
+	.timer-display {
+		font-size: 2.2rem;
+	}
+
+	.timer-controls,
+	.settings-form {
+		gap: 8px;
+	}
+
+	button,
+	input,
+	.history-list li {
+		font-size: 0.82rem;
+	}
+}
