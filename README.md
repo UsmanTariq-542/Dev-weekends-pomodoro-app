@@ -2,6 +2,8 @@
 
 A polished single-screen Pomodoro web app built with vanilla HTML, CSS, and JavaScript. It includes configurable focus and break durations, persistent daily history, automatic cycle transitions, and a browser-tab countdown title.
 
+Live app: https://dev-weekends-pomodoro-app.vercel.app/
+
 ## Features
 
 - Focus and break timer with configurable durations
