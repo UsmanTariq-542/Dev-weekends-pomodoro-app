@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pomodoro Timer</title>
+</head>
+<body>
+	<header>
+		<h1>Pomodoro Timer</h1>
+		<p>Work in focused sprints and take deliberate breaks.</p>
+	</header>
+
+	<main>
+		<section aria-labelledby="timer-heading">
+			<h2 id="timer-heading">Timer</h2>
+
+			<div role="timer" aria-live="polite" aria-atomic="true" aria-describedby="mode-label">
+				<p id="mode-label">Focus</p>
+				<output id="time-display" aria-label="Time remaining">25:00</output>
+			</div>
+
+			<div aria-label="Timer controls">
+				<button type="button" id="start-pause-btn">Start</button>
+				<button type="button" id="reset-btn">Reset</button>
+			</div>
+		</section>
+
+		<section aria-labelledby="settings-heading">
+			<h2 id="settings-heading">Configuration</h2>
+
+			<form id="settings-form">
+				<label for="focus-minutes">Focus minutes</label>
+				<input id="focus-minutes" name="focusMinutes" type="number" min="1" step="1" value="25">
+
+				<label for="break-minutes">Break minutes</label>
+				<input id="break-minutes" name="breakMinutes" type="number" min="1" step="1" value="5">
+
+				<button type="submit">Apply settings</button>
+			</form>
+		</section>
+
+		<section aria-labelledby="history-heading">
+			<h2 id="history-heading">History</h2>
+			<ul id="history-list" aria-live="polite" aria-relevant="additions"></ul>
+		</section>
+	</main>
+
+	<script src="app.js"></script>
+</body>
+</html>
  
