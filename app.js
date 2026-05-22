@@ -31,6 +31,7 @@ const state = {
 let tickHandle = null;
 let titleHandle = null;
 let titleWorker = null;
+let audioContext = null;
 
 function clampPositiveInteger(value, fallback) {
 	const parsed = Number.parseInt(value, 10);
@@ -196,6 +197,43 @@ function syncTimerFromEndTimestamp() {
 	if (state.remainingMs <= 0) {
 		handlePhaseComplete();
 	}
+}
+
+function playCompletionCue() {
+	const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+	if (!AudioContextClass) {
+		return;
+	}
+
+	if (audioContext === null) {
+		audioContext = new AudioContextClass();
+	}
+
+	if (audioContext.state === 'suspended') {
+		audioContext.resume();
+	}
+
+	const now = audioContext.currentTime;
+	const oscillator = audioContext.createOscillator();
+	const gainNode = audioContext.createGain();
+
+	oscillator.type = 'sine';
+	oscillator.frequency.setValueAtTime(880, now);
+	oscillator.frequency.exponentialRampToValueAtTime(740, now + 0.16);
+
+	gainNode.gain.setValueAtTime(0.0001, now);
+	gainNode.gain.exponentialRampToValueAtTime(0.45, now + 0.02);
+	gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+
+	oscillator.connect(gainNode);
+	gainNode.connect(audioContext.destination);
+	oscillator.start(now);
+	oscillator.stop(now + 0.3);
+
+	oscillator.onended = () => {
+		oscillator.disconnect();
+		gainNode.disconnect();
+	};
 }
 
 function persistState() {
@@ -420,6 +458,7 @@ function switchMode() {
 function handlePhaseComplete() {
 	const completedMode = state.mode;
 	const completedDuration = currentDurationMs();
+	playCompletionCue();
 	addHistoryEntry(completedMode, completedDuration);
 	switchMode();
 
